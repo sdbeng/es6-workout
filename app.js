@@ -535,4 +535,21 @@ console.log(average(7, 1432, 12, 13, 100));
 console.log(average());
 console.log('****************');
 
-//
+//Binary Search - Source Code
+// Section 10, Lecture 42
+function binarySearch(numArray, key) {
+    var middleIdx = Math.floor(numArray.length / 2);
+    var middleElem = numArray[middleIdx];
+
+    if (middleElem === key) return true;
+    else if (middleElem < key && numArray.length > 1) {
+        return binarySearch(numArray.splice(middleIdx, numArray.length), key);
+    }
+    else if (middleElem > key && numArray.length > 1) {
+        return binarySearch(numArray.splice(0, middleIdx), key);
+    }
+    else return false;
+}
+
+binarySearch([5, 7, 12, 16, 36, 39, 42, 56, 71], 56);
+console.log('****************');
