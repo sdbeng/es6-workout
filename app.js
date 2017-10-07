@@ -295,8 +295,209 @@ for (const digit of digits3) {
 }
 
 // Quiz
+// Write a for...of loop that loops through each day in the days array
+// capitalizes the first letter of the day
 const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
+//can't use charAt since im iterating over an array
 for(const day of days){
-  console.log(day.chartAt(0).toUppercase());
+  let firstLetter = day.slice(0,1).toUpperCase()
+  let fullday = firstLetter + day.slice(1)
+  console.log(fullday);
 }
+
+// const f = () => {
+//   console.log('arrow f works');
+// }
+// f()
+
+//
+// function fx(string)
+// {
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+// }
+// console.log(fx('friday'))
+
+
+//get the index of each item by destructuring the data
+const cuts = ['Chuck', 'Brisket', 'Shank', 'Ribs']
+for (const [i, cut] of cuts.entries()){
+  console.log(`${cut} is the ${i} of item`); //Chuck is the 0 item, Brisket is the 1, etc
+  // console.log(`${cut} is the ${i+1} of item`); //offset:Chuck is the 1 item, Brisket is the 2, etc
+}
+
+//adding all numbers up without knowing how many numbers we're gonna get
+function addUpNumbers() {
+  let total = 0
+  for(const num of arguments){
+    total += num
+  }
+  console.log(total);
+  return total
+}
+addUpNumbers(34,35,46,346,46,3423,446,46,46,346,6,90) //
+
+/*
+ * Instructions: Use the spread operator to combine the `fruits` and `vegetables` arrays into the `produce` array.
+ */
+
+const fruits = ["apples", "bananas", "pears"];
+const vegetables = ["corn", "potatoes", "carrots"];
+
+const produce = [...fruits, ...vegetables];
+
+console.log(produce);
+
+// Using the rest parameter
+// Fortunately, with the addition of the rest parameter, you can rewrite the sum() function to read more clearly.
+let sum = (...nums) => {
+  let total = 0;
+  for(const num of nums) {
+    total += num;
+  }
+  return total;
+}
+console.log(sum(234,35345,466,333)) //much better than using the arguments object
+// This version of the sum() function is both more concise and is easier to read. Also, notice the for...in loop has been replaced with the new for...of loop.
+
+//loop over 2-dim array
+var grid = [['0, 0', '0, 1', '0, 2'],
+            ['1, 0', '1, 1', '1, 2'],
+            ['2, 0', '2, 1', '2, 2']];
+for(let i = 0; i < grid.length; i++){
+  for(let j = 0; j < grid[i].length; j++){
+    // console.log(grid[i][j]);//will print every item for each element in the 2-dim array Great!!
+  }
+}
+
+//fizzbuzz challenge
+const fizzBuzz = (num) => {
+  for(let i = 1; i <= num; i++){
+    //1st check it for both cases, then on each case, finally(else) print out the number
+    if(i % 3 === 0 && i % 5 === 0){ //or just i % 15 === 0 to refactor
+      console.log('fizzBuzz');
+    }
+    else if(i % 3 === 0){
+      console.log('fizz');
+    }
+    else if(i % 5 === 0){
+      console.log('buzz');
+    }else {
+      console.log(i);
+    }
+  }//end of for-loop
+}//end of function
+fizzBuzz(20)
+
+/* Harmless Ransom Note - Source Code
+Section 3, Lecture 12 -learning algorithms in JavaScript */
+
+function harmlessRansomNote(noteText, magazineText) {
+  var noteArr = noteText.split(' ');
+  var magazineArr = magazineText.split(' ');
+  var magazineObj = {};
+
+  magazineArr.forEach(word => {
+    if (!magazineObj[word]) magazineObj[word] = 0;
+    magazineObj[word]++;
+  });
+
+  var noteIsPossible = true;
+  noteArr.forEach(word => {
+    if (magazineObj[word]) {
+      magazineObj[word]--;
+      if (magazineObj[word] < 0) noteIsPossible = false;
+    }
+    else noteIsPossible = false;
+  });
+
+  return noteIsPossible;
+}
+
+let result3 = harmlessRansomNote('this is a secret note for you from a secret admirer', 'puerto rico is a place of great wonder and excitement it has many secret waterfall locatoins that i am an admirer of you must hike quite a distance to find the secret places as they are far from populated areas but it is worth the effort a tip i have for you is to go early in the morning when it is not so hot out also note that you must wear hiking boots this is one of the best places i have ever visited');
+console.log(result3); //true
+
+/* Is Palindrome algorithm - without regexp */
+function isPalindrome(string) {
+  string = string.toLowerCase();
+  var charactersArr = string.split('');
+  var validCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+  var lettersArr = [];
+  charactersArr.forEach(char => {
+    if (validCharacters.indexOf(char) > -1) lettersArr.push(char);
+  });
+
+  return lettersArr.join('') === lettersArr.reverse().join('');
+}
+
+isPalindrome("Madam, I'm Adam");
+
+//some test func to clean up an array of non characters letters
+const practice = (items) => {
+  //lower case it and convert it to an array
+  items = items.toLowerCase().split('')
+  // console.log(items);
+  let newArr = []
+  //declare valid chars array
+  let validCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+  for(let item of items){
+      // console.log('in loop:',items);
+
+      //check if element does exit in validCharacters array
+    if(validCharacters.indexOf(item) > -1){
+      newArr.push(item)
+    }
+  }
+  //return newArr convert it back to a string
+  return newArr.join('')
+}
+
+let staff = "This is a note. I'm working on my interview, code, code, code!"
+// let staff = ['a','b',';','c',',','d']
+console.log(practice(staff)) //thisisanoteimworkingonmyinterviewcodecodecode
+
+// Caesar Cipher - Source Code
+// Section 5, Lecture 20
+function caesarCipher(str,num) {
+  num = num % 26;
+  var lowerCaseString = str.toLowerCase();
+  var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  var newString = '';
+
+  for (var i = 0; i < lowerCaseString.length; i++) {
+    var currentLetter = lowerCaseString[i];
+    if (currentLetter === ' ') {
+      newString += currentLetter;
+      continue;
+    }
+    var currentIndex = alphabet.indexOf(currentLetter);
+    var newIndex = currentIndex + num;
+    if (newIndex > 25) newIndex = newIndex - 26;
+    if (newIndex < 0) newIndex = 26 + newIndex;
+    if (str[i] === str[i].toUpperCase()) {
+      newString += alphabet[newIndex].toUpperCase();
+    }
+    else newString += alphabet[newIndex];
+  };
+
+  return newString;
+}
+caesarCipher('Zoo Keeper', 2);
+
+//factorial
+function factorial(n) {
+	if (n === 0) return 1;
+	return n * factorial(n - 1);
+}
+
+console.log(factorial(5));
+
+//fibonacci challenge
+function fibonacci(position) {
+  if (position < 3) return 1;
+  else return fibonacci(position - 1) + fibonacci(position - 2);
+}
+
+fibonacci(6);
