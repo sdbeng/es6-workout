@@ -484,7 +484,7 @@ function caesarCipher(str,num) {
 
   return newString;
 }
-caesarCipher('Zoo Keeper', 2);
+// caesarCipher('Zoo Keeper', 2);
 
 //factorial
 function factorial(n) {
@@ -499,5 +499,40 @@ function fibonacci(position) {
   if (position < 3) return 1;
   else return fibonacci(position - 1) + fibonacci(position - 2);
 }
+console.log('****************');
+console.log(fibonacci(6));
+console.log('****************');
 
-fibonacci(6);
+/*
+Using the rest parameter
+Fortunately, with the addition of the rest parameter, you can rewrite the sum() function to read more clearly.
+*/
+function sum1(...nums) {
+  let total = 0;
+  for(const num of nums) {
+    total += num;
+  }
+  return total;
+}
+
+// *
+//  * Programming Quiz: Using the Rest Parameter (1-5)
+//  */
+
+function average(...nums) {
+  let sumAll = 0
+  let avg = 0
+  for(const num of nums){
+    sumAll += num
+    avg = sumAll / nums.length
+  }
+  return avg
+}
+console.log('****************');
+console.log(average(2, 6));
+console.log(average(2, 3, 3, 5, 7, 10));
+console.log(average(7, 1432, 12, 13, 100));
+console.log(average());
+console.log('****************');
+
+//
